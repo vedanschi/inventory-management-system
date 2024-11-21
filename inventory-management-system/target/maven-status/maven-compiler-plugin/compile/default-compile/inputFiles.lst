@@ -1,0 +1,16 @@
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\servlet\SearchProductServlet.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\model\Product.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\dijkstra\DijkstraAlgorithm.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\servlet\DijkstraServlet.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\servlet\ProductServlet.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\dijkstra\Graph.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\servlet\TransferProductServlet.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\config\DatabaseConfig.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\util\HashUtil.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\dao\ProductDAO.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\util\GenerateProductHashes.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\model\Warehouse.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\servlet\UpdateStockServlet.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\servlet\GetWarehousesServlet.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\dao\WarehouseDAO.java
+C:\Users\dell\iop\inventory-management-system\src\main\java\com\inventory\dijkstra\Edge.java

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Product Details</h2>
+        <p><strong>Product ID:</strong> <span id="productId">Loading...</span></p>
+        <p><strong>Product Name:</strong> <span id="productName">Loading...</span></p>
+        <p><strong>Type:</strong> <span id="type">Loading...</span></p>
+        <p><strong>Quantity:</strong> <span id="quantity">Loading...</span></p>
+        <p><strong>Warehouse:</strong> <span id="warehouseId">Loading...</span></p>
+
+        <h3>Update Quantity</h3>
+        <form id="updateStockForm" action="/InventoryManagementSystem/UpdateStockServlet" method="POST">
+            <input type="hidden" id="hiddenProductId" name="productId">
+            <input type="hidden" id="hiddenWarehouseId" name="startWarehouseId">
+            <label for="quantity">Add Stock:</label>
+            <input type="number" id="quantityInput" name="quantity" required min="1">
+            <button type="submit">Add Stock</button>
+        </form>
+
+        <h3>Ship to Different Warehouse</h3>
+        <form id="transferForm" action="WarehouseTransfer.html" method="GET">
+    <input type="hidden" name="productId" id="transferProductId">
+    <input type="hidden" name="startWarehouseId" id="transferWarehouseId">
+    <button type="submit">Ship</button>
+</form>
+    </div>
+
+    <script>
+        // Extract productId from URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('productId');
+
+        if (productId) {
+            // Fetch product details dynamically
+            fetch(`/InventoryManagementSystem/api/products?productId=${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Product not found. Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message); // Show message if the product is not found
+                    } else {
+                        // Populate product details in the DOM
+                        document.getElementById('productId').textContent = data.productId;
+                        document.getElementById('productName').textContent = data.productName;
+                        document.getElementById('type').textContent = data.type;
+                        document.getElementById('quantity').textContent = data.quantity;
+                        document.getElementById('warehouseId').textContent = data.warehouseId;
+
+                        // Populate hidden form fields
+                        document.getElementById('hiddenProductId').value = data.productId;
+                        document.getElementById('transferProductId').value = data.productId;
+                        document.getElementById('hiddenWarehouseId').value = data.warehouseId;
+                        document.getElementById('transferWarehouseId').value = data.warehouseId;// Set the warehouse ID
+                    }
+                })
+                .catch(error => {
+                    alert("Error fetching product details: " + error.message);
+                    console.error(error);
+                });
+        } else {
+            alert("Product ID not provided in URL!");
+        }
+    </script>
+    <script>
+        document.getElementById('updateStockForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent default form submission
+            const quantity = document.getElementById('quantityInput').value;
+            if (quantity && !isNaN(quantity)) {
+                fetch('/InventoryManagementSystem/UpdateStockServlet', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productId: productId, quantity: quantity })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload(); // Reload to show updated stock
+                })
+                .catch(err => {
+                    alert('Error updating stock');
+                    console.error(err);
+                });
+            } else {
+                alert("Please enter a valid quantity.");
+            }
+        });
+    </script>
+</body>
+</html>

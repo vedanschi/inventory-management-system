@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Search Product</h2>
+        <form id="searchForm" action="/InventoryManagementSystem/SearchProductServlet" method="GET">
+            <label for="productId">Search by Product ID:</label>
+            <input type="text" id="productId" name="productId" placeholder="Enter Product ID">
+            <label for="productName">Search by Product Name:</label>
+            <input type="text" id="productName" name="productName" placeholder="Enter Product Name">
+            <button type="submit">Search</button>
+        </form>
+        
+    </div>
+
+    <script>
+        document.getElementById('searchForm').onsubmit = function (e) {
+            const productId = document.getElementById('productId').value.trim();
+            const productName = document.getElementById('productName').value.trim();
+
+            if (!productId && !productName) {
+                e.preventDefault();
+                alert("Please enter either a Product ID or Product Name to search.");
+            }
+        };
+    </script>
+</body>
+</html>

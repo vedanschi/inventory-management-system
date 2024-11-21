@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Transfer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Select Destination Warehouse</h2>
+        <form id="transferForm" action="/InventoryManagementSystem/TransferProductServlet" method="POST">
+            <input type="hidden" name="productId" id="productIdInput">
+            <input type="hidden" name="startWarehouseId" id="startWarehouseIdInput">
+            <label for="warehouseId">Select Warehouse:</label>
+            <select name="warehouseId" id="warehouseSelect" required>
+                <option value="">-- Select Warehouse --</option>
+            </select>
+            <button type="submit">Transfer</button>
+        </form>
+
+        <h3>Optimal Path</h3>
+        <p id="warehousePath">[Path will display here]</p>
+    </div>
+
+    <script>
+        // Extract productId and startWarehouseId from URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('productId');
+        const startWarehouseId = urlParams.get('startWarehouseId');
+
+        // Populate hidden inputs for productId and startWarehouseId
+        document.getElementById('productIdInput').value = productId;
+        document.getElementById('startWarehouseIdInput').value = startWarehouseId;
+
+        // Fetch list of warehouses
+        fetch('/InventoryManagementSystem/GetWarehouses')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('warehouseSelect');
+                Object.keys(data).forEach(warehouseId => {
+                    let option = document.createElement("option");
+                    option.value = warehouseId;
+                    option.textContent = data[warehouseId];
+                    select.appendChild(option);
+                });
+            })
+            .catch(err => console.error("Error loading warehouses: ", err));
+
+        // Handle form submission and show optimal path
+        document.getElementById('transferForm').onsubmit = function (e) {
+            e.preventDefault();
+
+            const endWarehouseId = document.getElementById('warehouseSelect').value;
+
+            if (!endWarehouseId || !startWarehouseId) {
+                alert("Please select a destination warehouse.");
+                return;
+            }
+
+            fetch(`/InventoryManagementSystem/DijkstraServlet?startWarehouseId=${startWarehouseId}&endWarehouseId=${endWarehouseId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.path && data.path.length > 0) {
+                        const pathWithNames = data.path.map(id => `${id} (ID: ${id})`).join(" → ");
+                        document.getElementById('warehousePath').textContent = `Path: ${pathWithNames}`;
+                    } else {
+                        document.getElementById('warehousePath').textContent = "No path found.";
+                    }
+                })
+                .catch(err => {
+                    alert("Error calculating optimal path: " + err.message);
+                    console.error(err);
+                });
+        };
+    </script>
+</body>
+</html>

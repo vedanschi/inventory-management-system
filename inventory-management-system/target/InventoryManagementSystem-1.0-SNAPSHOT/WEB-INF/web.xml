@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+            http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- SearchProductServlet -->
+    <servlet>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <servlet-class>com.inventory.servlet.SearchProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <url-pattern>/SearchProductServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- ProductServlet -->
+    <servlet>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>com.inventory.servlet.ProductServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/api/products</url-pattern>
+</servlet-mapping>
+
+
+    <!-- TransferProductServlet -->
+    <servlet>
+        <servlet-name>TransferProductServlet</servlet-name>
+        <servlet-class>com.inventory.servlet.TransferProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TransferProductServlet</servlet-name>
+        <url-pattern>/TransferProductServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- UpdateStockServlet -->
+    <servlet>
+    <servlet-name>UpdateStockServlet</servlet-name>
+    <servlet-class>com.inventory.servlet.UpdateStockServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>UpdateStockServlet</servlet-name>
+    <url-pattern>/UpdateStockServlet</url-pattern>
+</servlet-mapping>
+
+
+    <!-- DijkstraServlet -->
+    <servlet>
+    <servlet-name>DijkstraServlet</servlet-name>
+    <servlet-class>com.inventory.servlet.DijkstraServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>DijkstraServlet</servlet-name>
+    <url-pattern>/DijkstraServlet</url-pattern>
+</servlet-mapping>
+    
+    <servlet>
+    <servlet-name>GetWarehousesServlet</servlet-name>
+    <servlet-class>com.inventory.servlet.GetWarehousesServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>GetWarehousesServlet</servlet-name>
+    <url-pattern>/GetWarehouses</url-pattern>
+</servlet-mapping>
+
+
+</web-app>

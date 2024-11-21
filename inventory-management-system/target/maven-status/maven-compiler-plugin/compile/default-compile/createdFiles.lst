@@ -1,0 +1,17 @@
+com\inventory\dijkstra\Graph.class
+com\inventory\util\HashUtil.class
+com\inventory\servlet\SearchProductServlet.class
+com\inventory\servlet\GetWarehousesServlet.class
+com\inventory\servlet\TransferProductServlet.class
+com\inventory\util\GenerateProductHashes.class
+com\inventory\model\Product.class
+com\inventory\servlet\ProductServlet.class
+com\inventory\dijkstra\DijkstraAlgorithm.class
+com\inventory\servlet\UpdateStockServlet.class
+com\inventory\dao\ProductDAO.class
+com\inventory\dijkstra\Edge.class
+com\inventory\dao\WarehouseDAO.class
+com\inventory\servlet\DijkstraServlet.class
+com\inventory\model\Warehouse.class
+com\inventory\servlet\UpdateStockServlet$StockUpdateRequest.class
+com\inventory\config\DatabaseConfig.class
